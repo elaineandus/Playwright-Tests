@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 
-test('test', async ({ page }) => {
+test('Sign Up', async ({ page }) => {
   await page.goto('https://stag.carbids.ph/');
   await page.getByRole('link', { name: 'Sign in' }).click();
 
