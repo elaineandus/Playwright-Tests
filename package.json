@@ -17,5 +17,8 @@
   "homepage": "https://github.com/elaineandus/Playwright-Tests#readme",
   "devDependencies": {
     "@playwright/test": "^1.31.2"
+  },
+  "dependencies": {
+    "playwright": "^1.31.2"
   }
 }
