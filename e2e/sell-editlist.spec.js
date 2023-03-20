@@ -13,7 +13,7 @@ test('Car List - Edit, Save and Continue', async ({ page }) => {
   await page.getByRole('link', { name: 'My Cars' }).click();
   await page.getByRole('button', { name: '' }).first().click();
   await page.getByRole('link', { name: ' Edit' }).click();
-  await page.getByLabel('Title').fill('Tsikot');
+  await page.getByLabel('Title').fill('Honda');
 
   await page.getByRole('button', { name: 'Save and continue' }).click();
 });

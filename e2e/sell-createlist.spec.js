@@ -10,7 +10,7 @@ test('Creating Listing - Fill Out Sell Car', async ({ page }) => {
 
   await page.getByRole('banner').getByRole('link', { name: 'Sell car' }).click();
  
-  await page.getByLabel('Title').fill('Ford');
+  await page.getByLabel('Title').fill('Mitsubishi');
   await page.getByLabel('Auction Start').fill('2023-03-21T10:40');
   await page.getByLabel('Auction End').fill('2023-03-22T22:40');
  
