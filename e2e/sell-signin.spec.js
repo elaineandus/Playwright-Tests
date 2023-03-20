@@ -1,3 +1,4 @@
+/* PASSED 3 BROWSERS */
 import { test } from '@playwright/test';
 
 test('Sign In', async ({ page }) => {

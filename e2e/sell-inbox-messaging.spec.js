@@ -1,3 +1,4 @@
+/* PASSED 3 BROWSERS */
 import { test, expect } from '@playwright/test';
 
 test('Messaging - Inbox, Reply Message', async ({ page }) => {
@@ -11,8 +12,8 @@ test('Messaging - Inbox, Reply Message', async ({ page }) => {
 
   await page.getByRole('link', { name: 'New Message' }).click();
   await page.locator('#id_to_user').selectOption('8');
-  await page.locator('#id_subject').fill('hello');
+  await page.locator('#id_subject').fill('anongsayo');
   await page.locator('#id_content').click();
-  await page.locator('#id_content').fill('hello');
+  await page.locator('#id_content').fill('anongsayo');
   await page.getByRole('button', { name: 'Send' }).click();
 });

@@ -1,3 +1,4 @@
+/* PASSED 3 BROWSERS */
 import { test, expect } from '@playwright/test';
 
 test('Car List - Delete, Click Yes', async ({ page }) => {
@@ -9,6 +10,6 @@ test('Car List - Delete, Click Yes', async ({ page }) => {
 
   await page.getByRole('link', { name: 'My Cars' }).click();
   await page.getByRole('button', { name: '' }).nth(1).click();
-  await page.getByRole('button', { name: 'Delete' }).click();
+  await page.getByRole('button', { name: ' Delete' }).click();
   await page.getByRole('button', { name: 'Yes' }).click();
 });

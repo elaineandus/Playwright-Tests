@@ -1,3 +1,4 @@
+/* PASSED 3 BROWSERS */
 import { test, expect } from '@playwright/test';
 
 test('Creating Listing - Fill Out Sell Car', async ({ page }) => {
@@ -9,9 +10,9 @@ test('Creating Listing - Fill Out Sell Car', async ({ page }) => {
 
   await page.getByRole('banner').getByRole('link', { name: 'Sell car' }).click();
  
-  await page.getByLabel('Title').fill('FORDAY');
-  await page.getByLabel('Auction Start').fill('2023-03-20T10:40');
-  await page.getByLabel('Auction End').fill('2023-03-21T22:40');
+  await page.getByLabel('Title').fill('Ford');
+  await page.getByLabel('Auction Start').fill('2023-03-21T10:40');
+  await page.getByLabel('Auction End').fill('2023-03-22T22:40');
  
   await page.getByLabel('Is reserved price').check();
   await page.getByLabel('Current Biding Amount').fill('100001');

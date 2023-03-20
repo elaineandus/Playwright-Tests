@@ -1,3 +1,4 @@
+/* PASSED 3 BROWSERS */
 import { test } from '@playwright/test';
 
 test('Sign Up', async ({ page }) => {
@@ -6,9 +7,9 @@ test('Sign Up', async ({ page }) => {
 
   await page.getByRole('link', { name: 'Sign up here' }).click();
 
-  await page.getByPlaceholder('Enter your first name').fill('wonder');
-  await page.getByPlaceholder('Enter your last name').fill('woman');
-  await page.getByRole('textbox', { name: 'Email address' }).fill('wonderwoman@gmail.com');
+  await page.getByPlaceholder('Enter your first name').fill('super');
+  await page.getByPlaceholder('Enter your last name').fill('bee');
+  await page.getByRole('textbox', { name: 'Email address' }).fill('superbee@gmail.com');
 
   await page.getByLabel('Password min. 8 char').fill('password');
   await page.getByLabel('Confirm password').fill('password');

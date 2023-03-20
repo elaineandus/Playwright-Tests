@@ -1,3 +1,4 @@
+/* PASSED 3 BROWSERS */
 import { test, expect } from '@playwright/test';
 
 test('Comments - Click Votes', async ({ page }) => {
