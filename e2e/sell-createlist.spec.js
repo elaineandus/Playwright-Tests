@@ -1,8 +1,9 @@
-/* PASSED 3 BROWSERS */
 import { test, expect } from '@playwright/test';
 
-test('Creating Listing - Fill Out Sell Car', async ({ page }) => {
+test('seller should be able to create a car list', async ({ page }) => {
+  await page.setDefaultTimeout(60000);
   await page.goto('https://stag.carbids.ph/');
+  
   await page.getByRole('link', { name: 'Sign in' }).click();
   await page.getByRole('textbox', { name: 'Email address' }).fill('elaine.andus@iainnovations.com');
   await page.getByPlaceholder('Enter password').fill('password');
@@ -10,9 +11,9 @@ test('Creating Listing - Fill Out Sell Car', async ({ page }) => {
 
   await page.getByRole('banner').getByRole('link', { name: 'Sell car' }).click();
  
-  await page.getByLabel('Title').fill('Mitsubishi');
-  await page.getByLabel('Auction Start').fill('2023-03-21T10:40');
-  await page.getByLabel('Auction End').fill('2023-03-22T22:40');
+  await page.getByLabel('Title').fill('Tsikot');
+  await page.getByLabel('Auction Start').fill('2023-03-22T10:40');
+  await page.getByLabel('Auction End').fill('2023-03-23T22:40');
  
   await page.getByLabel('Is reserved price').check();
   await page.getByLabel('Current Biding Amount').fill('100001');
@@ -39,4 +40,8 @@ test('Creating Listing - Fill Out Sell Car', async ({ page }) => {
   await page.frameLocator('iframe[title="Rich Text Editor\\, id_seller_notes"]').locator('body').fill('buy now');
   
   await page.getByRole('button', { name: 'Save and continue' }).click();
+
+  /* await expect(page).toHaveTitle('Carbids.ph | Sell Car'); */
+  const successCreate = await page.locator('text=Success');
+  await expect(successCreate).toContainText('Success');
 });

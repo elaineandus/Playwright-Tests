@@ -19,6 +19,8 @@
     "@playwright/test": "^1.31.2"
   },
   "dependencies": {
-    "playwright": "^1.31.2"
+    "firefox": "^0.0.1",
+    "playwright": "^1.31.2",
+    "webkit": "^0.0.0"
   }
 }

@@ -1,4 +1,3 @@
-/* PASSED 3 BROWSERS */
 import { test, expect } from '@playwright/test';
 
 test('Car List - Edit, Save and Continue', async ({ page }) => {
@@ -13,7 +12,10 @@ test('Car List - Edit, Save and Continue', async ({ page }) => {
   await page.getByRole('link', { name: 'My Cars' }).click();
   await page.getByRole('button', { name: '' }).first().click();
   await page.getByRole('link', { name: ' Edit' }).click();
-  await page.getByLabel('Title').fill('Honda');
+  await page.getByLabel('Title').fill('Taylor');
 
   await page.getByRole('button', { name: 'Save and continue' }).click();
+
+  const successEdit = await page.locator('text=Success');
+  await expect(successEdit).toContainText('Success');
 });
