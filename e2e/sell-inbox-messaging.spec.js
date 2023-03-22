@@ -1,4 +1,3 @@
-/* PASSED 3 BROWSERS */
 import { test, expect } from '@playwright/test';
 
 test('Messaging - Inbox, Reply Message', async ({ page }) => {
@@ -16,4 +15,7 @@ test('Messaging - Inbox, Reply Message', async ({ page }) => {
   await page.locator('#id_content').click();
   await page.locator('#id_content').fill('anongsayo');
   await page.getByRole('button', { name: 'Send' }).click();
+
+  const successMessage = await page.locator('text=anongsayo');
+  await expect(successMessage).toContainText('anongsayo');
 });

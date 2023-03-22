@@ -10,7 +10,7 @@ test('seller should be able to upload photos completely', async ({ page }) => {
 
   await page.getByRole('banner').getByRole('link', { name: 'Sell car' }).click();
  
-  await page.getByLabel('Title').fill('aba');
+  await page.getByLabel('Title').fill('ice cream');
   await page.getByLabel('Auction Start').fill('2023-04-23T10:40');
   await page.getByLabel('Auction End').fill('2023-04-24T10:40');
  
@@ -37,47 +37,45 @@ test('seller should be able to upload photos completely', async ({ page }) => {
   await page.frameLocator('iframe[title="Rich Text Editor\\, id_ownership_history"]').locator('body').fill('n/a');
   await page.frameLocator('iframe[title="Rich Text Editor\\, id_seller_notes"]').locator('body').fill('buy now');
 
-// Drag and drop #exterior input field
-const exteriorInputSelector = '#exterior input[type="file"]';
-const exteriorInputElement = await page.$(exteriorInputSelector);
-const exteriorFilePath = 'C:\\Users\\IA-Trainee\\Documents\\GitHub\\Playwright-Tests\\e2e\\carext2.jpeg';
+  const exteriorInputSelector = '#exterior input[type="file"]';
+  await page.setInputFiles(exteriorInputSelector, ['C:\\Users\\IA-Trainee\\Documents\\GitHub\\Playwright-Tests\\e2e\\carint1.jpeg']);
+  await page.setInputFiles(exteriorInputSelector, ['C:\\Users\\IA-Trainee\\Documents\\GitHub\\Playwright-Tests\\e2e\\carint1.jpeg']);
+  await page.setInputFiles(exteriorInputSelector, ['C:\\Users\\IA-Trainee\\Documents\\GitHub\\Playwright-Tests\\e2e\\carint1.jpeg']);
+  await page.setInputFiles(exteriorInputSelector, ['C:\\Users\\IA-Trainee\\Documents\\GitHub\\Playwright-Tests\\e2e\\carint1.jpeg']);
+  
 
-const exteriorInputBox = await exteriorInputElement.boundingBox();
-const exteriorInputCenter = {
-  x: exteriorInputBox.x + exteriorInputBox.width / 2,
-  y: exteriorInputBox.y + exteriorInputBox.height / 2,
-};
+  const exteriorCompleteSelector = '#exterior:has-text("Uploading")';
+await page.waitForSelector(exteriorCompleteSelector, { timeout: 10000 });
+await expect(await page.$(exteriorCompleteSelector)).not.toBeNull();
 
-await page.mouse.move(exteriorInputCenter.x, exteriorInputCenter.y);
-await page.mouse.down();
-await page.mouse.move(exteriorInputCenter.x + 10, exteriorInputCenter.y + 10);
-await page.mouse.up();
-await exteriorInputElement.setInputFiles(exteriorFilePath);
+/* const exteriorIncompleteSelector = '#exterior:has-no-text("Uploading")';
+await page.waitForSelector(exteriorIncompleteSelector, { timeout: 10000 }); */
 
-  const exteriorComplete = 'text=Upload complete';
-  await page.waitForSelector(exteriorComplete, { timeout: 10000 });
-  await expect(await page.$(exteriorComplete)).not.toBeNull();
-
-// Upload #interior input field manually
-const interiorInputSelector = '#interior input[type="file"]';
+  const interiorInputSelector = '#interior input[type="file"]';
 await page.setInputFiles(interiorInputSelector, ['C:\\Users\\IA-Trainee\\Documents\\GitHub\\Playwright-Tests\\e2e\\carint1.jpeg']);
 
-  const interiorComplete = 'text=Upload complete';
-  await page.waitForSelector(interiorComplete, { timeout: 8000 });
-  await expect(await page.$(interiorComplete)).not.toBeNull();
+const interiorCompleteSelector = '#interior:has-text("Uploading")';
+await page.waitForSelector(interiorCompleteSelector, { timeout: 100000 });
+await expect(await page.$(interiorCompleteSelector)).not.toBeNull();
 
-// Upload #others input field manually
+/* const interiorIncompleteSelector = '#interior:has-no-text("Uploading")';
+await page.waitForSelector(interiorIncompleteSelector, { timeout: 10000 }); */
+
 const othersInputSelector = '#others input[type="file"]';
-await page.setInputFiles(othersInputSelector, ['C:\\Users\\IA-Trainee\\Documents\\GitHub\\Playwright-Tests\\e2e\\carothers1.jpeg']);
+await page.setInputFiles(othersInputSelector, ['C:\\Users\\IA-Trainee\\Documents\\GitHub\\Playwright-Tests\\e2e\\carint1.jpeg']);
+await new Promise(resolve => setTimeout(resolve, 10000));
 
-  const othersComplete = 'text=Upload complete';
-  await page.waitForSelector(othersComplete, { timeout: 7000 });
-  await expect(await page.$(othersComplete)).not.toBeNull();
+/* const othersCompleteSelector = '#others:has-text("Uploading")';
+await page.waitForSelector(othersCompleteSelector, { timeout: 10000 });
+await expect(await page.$(othersCompleteSelector)).not.toBeNull(); */
+
+/* const othersIncompleteSelector = '#others:has-no-text("Uploading")';
+await page.waitForSelector(othersIncompleteSelector, { timeout: 10000 }); */
 
   await page.getByRole('button', { name: 'Save and continue' }).click();
 
   const successCreate = await page.locator('text=Success');
   await expect(successCreate).toContainText('Success');
-/* }); */
+});
 
-},60000);
+

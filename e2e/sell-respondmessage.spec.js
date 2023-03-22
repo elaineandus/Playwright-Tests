@@ -16,4 +16,7 @@ test('Follow Up From Workflow - Respond to Message, Click Submit', async ({ page
   await page.locator('#id_content').fill('abasushi');
 
   await page.getByRole('button', { name: 'Send' }).click();
+
+  const successRespond = await page.locator('text=abasushi');
+  await expect(successRespond).toContainText('abasushi');
 });
