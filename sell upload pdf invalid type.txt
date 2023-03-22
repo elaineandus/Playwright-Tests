@@ -1,0 +1,75 @@
+import { test, expect } from '@playwright/test';
+
+test('seller should be able to upload photos completely', async ({ page }) => {
+  await page.goto('https://stag.carbids.ph/');
+  
+  await page.getByRole('link', { name: 'Sign in' }).click();
+  await page.getByRole('textbox', { name: 'Email address' }).fill('elaine.andus@iainnovations.com');
+  await page.getByPlaceholder('Enter password').fill('password');
+  await page.getByRole('button', { name: 'Sign in' }).click();
+
+  await page.getByRole('banner').getByRole('link', { name: 'Sell car' }).click();
+ 
+  
+  await page.getByLabel('Title').fill('aba');
+  await page.getByLabel('Auction Start').fill('2023-04-23T10:40');
+  await page.getByLabel('Auction End').fill('2023-04-24T10:40');
+ 
+  await page.getByLabel('Current Biding Amount').fill('100001');
+  await page.getByRole('combobox', { name: 'Make' }).selectOption('1');
+  await page.getByLabel('Model').fill('n/a');
+  await page.locator('#id_year').fill('1');
+  await page.getByLabel('Year').fill('1');
+
+  await page.getByRole('combobox', { name: 'Body Style' }).selectOption('Compact');
+  await page.getByRole('combobox', { name: 'Fuel Type' }).selectOption('Gasoline');
+  await page.getByLabel('Engine').fill('n/a');
+  await page.locator('#id_transmission').selectOption('Automatic');
+  await page.locator('#id_drivetrain').selectOption('AWD');
+  await page.getByLabel('Exterior Color').fill('n/a');
+  await page.getByLabel('Interior Color').fill('n/a');
+
+  await page.frameLocator('iframe[title="Rich Text Editor\\, id_highlights"]').locator('body').fill('n/a');
+  await page.frameLocator('iframe[title="Rich Text Editor\\, id_known_flaws"]').locator('body').fill('n/a');
+  await page.frameLocator('iframe[title="Rich Text Editor\\, id_equipment"]').locator('body').fill('n/a');
+  await page.frameLocator('iframe[title="Rich Text Editor\\, id_modifications"]').locator('body').fill('n/a');
+  await page.frameLocator('iframe[title="Rich Text Editor\\, id_recent_service_history"]').locator('body').fill('n/a');
+  await page.frameLocator('iframe[title="Rich Text Editor\\, id_other_items"]').locator('body').fill('n/a');
+  await page.frameLocator('iframe[title="Rich Text Editor\\, id_ownership_history"]').locator('body').fill('n/a');
+  await page.frameLocator('iframe[title="Rich Text Editor\\, id_seller_notes"]').locator('body').fill('buy now');
+
+  const path = require('path');
+
+  const exteriorFiles = [
+    path.join(__dirname, 'slip.pdf'),
+  ];
+  
+  await page.setInputFiles('#exterior input[type="file"]', exteriorFiles);
+  await new Promise(resolve => setTimeout(resolve, 5000));
+  
+  const exteriorComplete = 'text=File is of invalid type';
+  // Wait for the selector, but if it appears before timeout, throw an error
+  await page.waitForSelector(exteriorComplete, { timeout: 10000 }).catch(() => {
+    // The selector didn't appear, so we can proceed with the test
+    return;
+  });
+  
+  // If the selector did appear, throw an error and stop the test
+  if (await page.$(exteriorComplete)) {
+    throw new Error('File is of invalid type');
+  }
+  
+  // The selector didn't appear, so we can proceed with the test
+  // Add your test steps here
+  
+
+
+  await page.getByRole('button', { name: 'Save and continue' }).click();
+
+  const successCreate = await page.locator('text=Success');
+  await expect(successCreate).toContainText('Success');
+/* }); */
+
+});
+
+
