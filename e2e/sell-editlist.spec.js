@@ -12,10 +12,14 @@ test('Car List - Edit, Save and Continue', async ({ page }) => {
   await page.getByRole('link', { name: 'My Cars' }).click();
   await page.getByRole('button', { name: '' }).first().click();
   await page.getByRole('link', { name: ' Edit' }).click();
-  await page.getByLabel('Title').fill('Taylor');
+  await page.getByLabel('Title').fill('aloha');
 
   await page.getByRole('button', { name: 'Save and continue' }).click();
 
+  /* const successEdit = await page.locator('text=Success');
+  await expect(successEdit).toContainText('Success'); */
   const successEdit = await page.locator('text=Success');
-  await expect(successEdit).toContainText('Success');
+await page.waitForLoadState();
+await expect(await successEdit.innerText()).toContainText('Success');
+
 });
