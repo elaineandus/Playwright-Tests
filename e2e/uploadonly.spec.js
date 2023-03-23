@@ -69,7 +69,6 @@ test('test', async ({ page }) => {
   await page.setInputFiles('#others input[type="file"]', otherFiles);
   await new Promise(resolve => setTimeout(resolve, 7000));
 
-
   const completeUpload = await page.getByText('Upload complete', { exact: true });
   await expect(completeUpload).toContainText('Upload complete', { timeout: 10000 });
 
