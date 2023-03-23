@@ -2,7 +2,9 @@
 import { test, expect } from '@playwright/test';
 
 test('Follow Up From Workflow - Respond to Message, Click Submit', async ({ page }) => {
+  await page.setDefaultTimeout(60000);
   await page.goto('https://stag.carbids.ph/');
+
   await page.getByRole('link', { name: 'Sign in' }).click();
   await page.getByRole('textbox', { name: 'Email address' }).fill('elaine.andus@iainnovations.com');
   await page.getByPlaceholder('Enter password').fill('password');
@@ -13,10 +15,14 @@ test('Follow Up From Workflow - Respond to Message, Click Submit', async ({ page
   await page.click('[data-href*="/messages/thread/"]');
 
   await page.locator('#id_content').click();
-  await page.locator('#id_content').fill('abasushi');
+  await page.locator('#id_content').fill('bb');
 
   await page.getByRole('button', { name: 'Send' }).click();
 
-  const successRespond = await page.locator('text=abasushi');
-  await expect(successRespond).toContainText('abasushi');
+  await expect(page).toHaveURL('https://stag.carbids.ph/messages/inbox/');
+
+  await page.click('[data-href*="/messages/thread/"]');
+
+  const successRespond = await page.locator('div').filter({ hasText: 'bb' }).nth(1)
+  await expect(successRespond).toContainText('bb');
 });

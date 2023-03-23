@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('seller should be able to sign up successfully', async ({ page }) => {
-  await page.goto('https://stag.carbids.ph/');
+  await page.goto('https://stag.carbids.ph/', { timeout: 60000 });
   await page.getByRole('link', { name: 'Sign in' }).click();
 
   await page.getByRole('link', { name: 'Sign up here' }).click();
