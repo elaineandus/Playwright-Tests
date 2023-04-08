@@ -14,7 +14,7 @@ test('seller should be able to edit a car in a list', async ({ page }) => {
   await page.locator('#contextMenu1').first().click();
   await page.getByRole('link', { name: 'Edit' }).click();
 
-  await page.getByLabel('Title').fill('Elaine car');
+  await page.getByLabel('Title').fill('not brook car');
   await page.getByRole('button', { name: 'Save and continue' }).click();
 
   await expect(page.locator('.alert-message')).toContainText('Success:');

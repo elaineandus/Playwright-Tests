@@ -18,9 +18,5 @@ test('seller should be able to delete a car in a list', async ({ page }) => {
 
   await expect(page.getByText('Success')).toBeVisible();
 
-  /* can be
-  await expect(page.locator('.alert-message')).toContainText('Success:'); 
-  */
-  
 });
 

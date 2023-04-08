@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('seller should be able to list a car', async ({ page }) => {
 
-  await page.goto('https://stag.carbids.ph/', { timeout: 60000 });
+  await page.goto('https://stag.carbids.ph/');
   
   await page.getByRole('link', { name: 'Sign in' }).click();
   await page.getByRole('textbox', { name: 'Email address' }).fill('elaine.andus@iainnovations.com');
@@ -11,9 +11,9 @@ test('seller should be able to list a car', async ({ page }) => {
 
   await page.getByRole('banner').getByRole('link', { name: 'Sell car' }).click();
  
-  await page.getByLabel('Title').fill('Zoro car');
-  await page.getByLabel('Auction Start').fill('2023-04-22T10:40');
-  await page.getByLabel('Auction End').fill('2023-04-23T22:40');
+  await page.getByLabel('Title').fill('brook car');
+  await page.getByLabel('Auction Start').fill('2024-04-22T10:40');
+  await page.getByLabel('Auction End').fill('2024-04-23T22:40');
  
   await page.getByLabel('Is reserved price').check();
   await page.getByLabel('Current Biding Amount').fill('100001');
@@ -41,12 +41,6 @@ test('seller should be able to list a car', async ({ page }) => {
   
   await page.getByRole('button', { name: 'Save and continue' }).click();
 
- /*  const successCreate = await page.locator('text=Success');
-  await expect(successCreate).toContainText('Success'); */
-
-  /* Success: Item was successfully created! */
-
-  /* await expect(page.locator('#alert-message')).toContainText('Success:'); */
   await expect(page.getByText('Success')).toBeVisible();
   
 });
