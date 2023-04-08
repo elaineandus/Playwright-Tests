@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Messaging - Inbox, Reply Message', async ({ page }) => {
+test('seller should be able to message to the buyers message', async ({ page }) => {
   await page.goto('https://stag.carbids.ph/', { timeout: 60000 });
   
   await page.getByRole('link', { name: 'Sign in' }).click();
@@ -11,15 +11,19 @@ test('Messaging - Inbox, Reply Message', async ({ page }) => {
   await page.getByRole('link', { name: 'Inbox' }).click();
 
   await page.getByRole('link', { name: 'New Message' }).click();
-  await page.locator('#id_to_user').selectOption('1');
-  await page.locator('#id_subject').fill('anongsayo');
-  await page.locator('#id_content').click();
-  await page.locator('#id_content').fill('anongsayo');
+
+  await page.locator('#id_to_user').selectOption('2');
+
+  await page.locator('#id_subject').fill('Input subject');
+  /* await page.locator('#id_content').click(); */
+  await page.locator('#id_content').fill('Hello im lainey');
   
   await page.getByRole('button', { name: 'Send' }).click();
 
-  const successMessage = await page.getByText('anongsayo', { exact: true });
-  await expect(successMessage).toContainText('anongsayo');
+  await expect(page.getByText('lainey')).toBeVisible();
+
+  /* const successMessage = await page.getByText('anongsayo', { exact: true });
+  await expect(successMessage).toContainText('anongsayo'); */
 });
 
 /* // create a todo count locator
