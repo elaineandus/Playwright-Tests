@@ -1,14 +1,20 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-test('Q and A - Ask the Seller, Submit', async ({ page }) => {
+test('buyer can message the seller', async ({ page }) => {
+
     await page.goto('https://stag.carbids.ph/');
+
     await page.getByRole('link', { name: 'Sign in' }).click();
-    await page.getByRole('textbox', { name: 'Email address' }).fill('elaine.andus@iainnovations.com');
-    await page.getByPlaceholder('Enter password').fill('password');
+
+    await page.locator('#signin-email').fill('elaine.andus@iainnovations.com');
+    await page.locator('#signin-password').fill('password');
+
     await page.getByRole('button', { name: 'Sign in' }).click();
 
     await page.getByRole('button', { name: 'Cars' }).click();
     await page.getByRole('link', { name: 'Car Marketplace' }).click();
+
+    await expect(page).toHaveTitle('Carbids.ph | Marketplace');
 
     await page.getByRole('button', { name: 'Make' }).click();
     await page.getByRole('link', { name: 'Chevrolet', exact: true }).click();
@@ -18,10 +24,17 @@ test('Q and A - Ask the Seller, Submit', async ({ page }) => {
     await page.getByRole('link', { name: 'All' }).click();
     await page.locator('form').filter({ hasText: 'Chevrolet All Abarth AC Acura Aixam Alfa Romeo ALPINA Artega Asia Motors Aston M' }).getByRole('button', { name: 'Search' }).click();
 
-    /* await page.locator('.img-overlay').first().click(); */
-    await page.click('[href*="/listings/single-car/97"]');
+    await page.locator('.card').first().click();
+
+    await expect(page).toHaveTitle('Carbids.ph | Single Car');
   
     await page.getByRole('link', { name: 'Ask the Seller' }).click();
-    await page.getByPlaceholder('Write your question').fill('I have a question');
+   
+    await page.locator('#id_subject').fill('lover');
+    await page.locator('#id_content').fill('by taytay');
+
     await page.getByRole('button', { name: 'Submit' }).click();
+
+    await expect(page.getByText('Success')).toBeVisible();
+
 });
