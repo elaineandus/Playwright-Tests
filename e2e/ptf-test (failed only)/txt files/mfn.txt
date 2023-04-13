@@ -1,0 +1,66 @@
+const { test, expect } = require('@playwright/test');
+
+test('should check mf n', async ({ page }) => {
+
+    await page.goto('http://ptfstag2.zennerslab.com/');
+    await page.getByRole('link', { name: 'Search' }).nth(1).click();
+    await page.getByRole('main').locator('[id="1"]').check();
+    await page.getByRole('textbox', { name: 'Search' }).click();
+    await page.getByRole('textbox', { name: 'Search' }).fill('8409.99.39');
+    await page.locator('a').filter({ hasText: '8409.99.39- - - - Other' }).click();
+    await page.getByRole('button', { name: 'Search' }).click();
+    await page.getByRole('link', { name: 'MFN' }).click();
+
+  /* await page.locator('#tblinputYear1ConcessionMFNContainer').click(); */
+  /* await page.getByRole('cell', { name: '1', exact: true }).first().click();
+  await page.getByRole('cell', { name: '1', exact: true }).nth(1).click();
+  await page.getByRole('cell', { name: '1', exact: true }).nth(2).click();
+  await page.getByRole('cell', { name: '1 /e' }).nth(1).click();
+  await page.getByRole('cell', { name: '1 /e' }).nth(2).click();
+  await page.getByRole('cell', { name: 'EO 20 (s.2017)' }).first().click();
+  await page.getByRole('cell', { name: 'EO 20 (s.2017)' }).nth(1).click();
+  await page.getByRole('cell', { name: 'EO 20 (s.2017)' }).nth(2).click();
+  await page.getByRole('cell', { name: 'EO 20 (s.2017)' }).nth(3).click(); */
+
+  
+try {
+  const cell1 = await page.getByRole('cell', { name: '1', exact: true }).first()
+  await expect(cell1).toContainText('1 /e', { timeout: 10000 });
+} 
+catch (error) {
+    console.error(error);
+    // handle the error
+}
+
+try {
+  const cell2 = await page.getByRole('cell', { name: '1', exact: true }).nth(1)
+  await expect(cell2).toContainText('1', { timeout: 10000 });
+} 
+catch (error) {
+    console.error(error);
+    // handle the error
+}
+
+try {
+  const cell3 = await page.getByRole('cell', { name: '1', exact: true }).nth(2)
+  await expect(cell3).toContainText('1 /e', { timeout: 10000 });
+} 
+catch (error) {
+    console.error(error);
+    // handle the error
+}
+
+
+
+
+    
+ /*  const assertion = 
+  await page.getByRole('cell', { name: '1', exact: true }).first()
+  await page.getByRole('cell', { name: '1', exact: true }).nth(1)
+  await page.getByRole('cell', { name: '1', exact: true }).nth(2)
+  
+
+  await expect(assertion).toContainText('1 /e', { timeout: 10000 }); */
+
+});
+  
