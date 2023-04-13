@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test('should check correct tariff reduction schedule', async ({ page }) => {
 
@@ -11,10 +11,6 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Search' }).click();
   await page.getByRole('textbox', { name: 'Search' }).fill('5705.00.92');
   await page.locator('a').filter({ hasText: '5705.00.92- - Non-woven floor coverings, of a kind used for motor vehicles of he' }).click();
-  /* TOMORROW NA TWOH */
-  await page.getByRole('textbox', { name: 'Search' }).fill('7614.10.90');
-  await page.locator('a').filter({ hasText: '7614.10.90- - Other' }).click();
-
   await page.getByRole('button', { name: 'Search' }).click();
 
   await page.getByRole('link', { name: 'PH-EFTA FTA (CHE/LIE)' }).click();

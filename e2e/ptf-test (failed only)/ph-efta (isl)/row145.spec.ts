@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test('should check correct tariff reduction schedule', async ({ page }) => {
 
@@ -6,40 +6,41 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
 
   await page.getByRole('link', { name: 'Search' }).nth(1).click();
 
-  await page.getByRole('main').locator('[id="10"]').check();
+  await page.getByRole('main').locator('[id="11"]').check();
   
   await page.getByRole('textbox', { name: 'Search' }).click();
   await page.getByRole('textbox', { name: 'Search' }).fill('ex2 3903.19.90');
-  await page.getByRole('textbox', { name: 'Search' }).press('Enter');
   await page.locator('a').filter({ hasText: 'ex2 3903.19.90 Other' }).first().click();
+
   await page.getByRole('button', { name: 'Search' }).click();
 
   await page.getByRole('link', { name: 'Contains Extraction' }).click();
+
   await page.getByRole('cell', { name: 'ex2 3903.19.90' }).getByText('ex2 3903.19.90').click();
 
   try {
-    const k19 = await page.getByRole('cell', { name: '10'}).nth(2);
+    const k19 = await page.getByRole('cell', { name: '10' }).nth(2);
     await expect(k19).toContainText('10');
   } catch (error) {
     console.error(error);
   }
   
   try {
-    const k20 = await page.getByRole('cell', { name: '10'}).nth(3)
+    const k20 = await page.getByRole('cell', { name: '10' }).nth(3);
     await expect(k20).toContainText('10');
   } catch (error) {
     console.error(error);
   }
   
   try {
-    const k21 = await page.getByRole('cell', { name: '7'}).nth(2)
+    const k21 = await page.getByRole('cell', { name: '7' }).nth(2);
     await expect(k21).toContainText('7');
   } catch (error) {
     console.error(error);
   }
   
   try {
-    const k22 = await page.getByRole('cell', { name: '7'}).nth(3)
+    const k22 = await page.getByRole('cell', { name: '7' }).nth(3);
     await expect(k22).toContainText('7');
   } catch (error) {
     console.error(error);
@@ -54,34 +55,32 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
   
   try {
     const k24 = await page.getByRole('cell', { name: '5', exact: true }).first();
-    await expect(k24).toContainText('7', { timeout: 10000 });
+    await expect(k24).toContainText('7');
   } catch (error) {
     console.error(error);
-    // do not throw error here
   }
   
   try {
     const k25 = await page.getByRole('cell', { name: '5', exact: true }).nth(1);
-    await expect(k25).toContainText('5', { timeout: 10000 });
+    await expect(k25).toContainText('5');
   } catch (error) {
     console.error(error);
   }
   
   try {
     const k26 = await page.getByRole('cell', { name: '5', exact: true }).nth(2);
-    await expect(k26).toContainText('5', { timeout: 10000 });
+    await expect(k26).toContainText('5');
   } catch (error) {
     console.error(error);
   }
   
   try {
     const k27 = await page.getByRole('cell', { name: '0', exact: true });
-    await expect(k27).toContainText('0', { timeout: 10000 });
+    await expect(k27).toContainText('0');
   } catch (error) {
     console.error(error);
   }
   
-
 });
 
 
