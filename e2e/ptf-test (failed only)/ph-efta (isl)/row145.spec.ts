@@ -1,3 +1,5 @@
+// TEST DONE
+
 import { test, expect } from '@playwright/test';
 
 test('should check correct tariff reduction schedule', async ({ page }) => {
@@ -15,70 +17,82 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
   await page.getByRole('button', { name: 'Search' }).click();
 
   await page.getByRole('link', { name: 'Contains Extraction' }).click();
-
   await page.getByRole('cell', { name: 'ex2 3903.19.90' }).getByText('ex2 3903.19.90').click();
 
+   // Select the table cell with the code
+  const cell = await page.locator('#exConcessionRate td:nth-child(1)');
+  await expect(cell).toContainText('ex2 3903.19.90');
+
+  // Select the second cell in the same row (the "2019" column)
   try {
-    const k19 = await page.getByRole('cell', { name: '10' }).nth(2);
-    await expect(k19).toContainText('10');
+  const k19Cell = await page.locator('#exConcessionRate td:nth-child(2)');
+  await expect(k19Cell).toContainText('10');
   } catch (error) {
-    console.error(error);
+    await test.fail();
+  }
+
+  try {
+  // Select the third cell in the same row (the "2020" column)
+  const k20Cell = await page.locator('#exConcessionRate td:nth-child(3)');
+  await expect(k20Cell).toContainText('10');
+  } catch (error) {
+    await test.fail();
   }
   
+  // Select the fourth cell in the same row (the "2021" column)
   try {
-    const k20 = await page.getByRole('cell', { name: '10' }).nth(3);
-    await expect(k20).toContainText('10');
+  const k21Cell = await page.locator('#exConcessionRate td:nth-child(4)');
+  await expect(k21Cell).toContainText('7');
   } catch (error) {
-    console.error(error);
+    await test.fail();
   }
-  
+
+  // Select the fifth cell in the same row (the "2022" column)
   try {
-    const k21 = await page.getByRole('cell', { name: '7' }).nth(2);
-    await expect(k21).toContainText('7');
+  const k22Cell = await page.locator('#exConcessionRate td:nth-child(5)');
+  await expect(k22Cell).toContainText('7');
   } catch (error) {
-    console.error(error);
+    await test.fail();
   }
-  
+
+  // Select the fifth cell in the same row (the "2023" column)
   try {
-    const k22 = await page.getByRole('cell', { name: '7' }).nth(3);
-    await expect(k22).toContainText('7');
+  const k23Cell = await page.locator('#exConcessionRate td:nth-child(6)');
+  await expect(k23Cell).toContainText('7');
   } catch (error) {
-    console.error(error);
+    await test.fail();
   }
-  
+
+  // Select the fifth cell in the same row (the "2024" column)
   try {
-    const k23 = await page.getByRole('cell', { name: '7' }).nth(4);
-    await expect(k23).toContainText('7');
+  const k24Cell = await page.locator('#exConcessionRate td:nth-child(7)');
+  await expect(k24Cell).toContainText('7');
   } catch (error) {
-    console.error(error);
+    await test.fail();
   }
-  
+
+  // Select the fifth cell in the same row (the "2025" column)
   try {
-    const k24 = await page.getByRole('cell', { name: '5', exact: true }).first();
-    await expect(k24).toContainText('7');
+  const k25Cell = await page.locator('#exConcessionRate td:nth-child(8)');
+  await expect(k25Cell).toContainText('5');
   } catch (error) {
-    console.error(error);
+    await test.fail();
   }
-  
+
+  // Select the fifth cell in the same row (the "2026" column)
   try {
-    const k25 = await page.getByRole('cell', { name: '5', exact: true }).nth(1);
-    await expect(k25).toContainText('5');
+  const k26Cell = await page.locator('#exConcessionRate td:nth-child(9)');
+  await expect(k26Cell).toContainText('5');
   } catch (error) {
-    console.error(error);
+    await test.fail();
   }
-  
+
+  // Select the fifth cell in the same row (the "2027" column)
   try {
-    const k26 = await page.getByRole('cell', { name: '5', exact: true }).nth(2);
-    await expect(k26).toContainText('5');
+  const k27Cell = await page.locator('#exConcessionRate td:nth-child(10)');
+  await expect(k27Cell).toContainText('0');
   } catch (error) {
-    console.error(error);
-  }
-  
-  try {
-    const k27 = await page.getByRole('cell', { name: '0', exact: true });
-    await expect(k27).toContainText('0');
-  } catch (error) {
-    console.error(error);
+    await test.fail();
   }
   
 });

@@ -1,3 +1,5 @@
+// TEST DONE
+
 import { test, expect } from '@playwright/test';
 
 test('should check correct rate for 2023', async ({ page }) => {
@@ -22,11 +24,20 @@ test('should check correct rate for 2023', async ({ page }) => {
 
   // Select the third cell in the same row (the "Rate" column)
   const rateCell = await page.locator('#tblinputYear1ConcessionNOREOModal tr:nth-child(2) > td:nth-child(3)');
-  if (rateCell) {
-    const rateCellValue = await rateCell.innerText();
-    await expect(rateCellValue.trim()).toBe('40');
-  }
+
+  // Assertion
+  const rateCellValue = await rateCell.innerText();
+  await expect(rateCellValue).toBe('40');
 
 });
+
+// Before code that also works:
+/* const rateCell = await page.locator('#tblinputYear1ConcessionNOREOModal tr:nth-child(2) > td:nth-child(3)');
+if (rateCell) {
+  const rateCellValue = await rateCell.innerText();
+  await expect(rateCellValue.trim()).toBe('40');
+} */
+
+  
 
   
