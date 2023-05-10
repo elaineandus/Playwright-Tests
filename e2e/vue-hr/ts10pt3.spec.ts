@@ -66,6 +66,14 @@ await page.getByLabel('Holiday Work Requires Approval').check();
 await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
 
    await page.getByRole('button', { name: 'Save' }).click();
+
+   // modify time in and time out
+   await page.goto('http://192.168.11.6:3005/Attendances?employeeId=&startTime=&endTime=&all=yes', { timeout: 60000 });
+
+   await page.locator('tr:nth-child(7) > td:nth-child(3) > .form-control').fill('2022-10-27T08:10');
+   await page.locator('tr:nth-child(10) > td:nth-child(3) > .form-control').fill('2022-10-27T17:00');
+
+   await page.locator('#btnSaveLogs').click();
    
    // timekeeping and payroll - processing page
    await page.goto('http://192.168.11.6:3005/TimeSheet', { timeout: 60000 }); 
