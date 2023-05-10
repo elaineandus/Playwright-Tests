@@ -21,6 +21,50 @@ test('test scenario 1', async ({ page }) => {
    await page.getByLabel('Allow Overtime (OT)').uncheck();
    await page.getByLabel('Absent If Tardiness Reached (Mins)').fill('120');
 
+   // Work Hours
+await page.getByLabel('Required Hours Per Week').fill('48.00');
+await page.getByLabel('Required Hours Per Day').fill('8.00');
+await page.getByLabel('Calculate by Required Hours per Month').uncheck();
+await page.getByLabel('Is Compressed Work Week').uncheck();
+await page.getByLabel('Calculate By Total Work Hours').uncheck();
+
+// Flexible:
+await page.getByLabel('Is Flexible').uncheck();
+await page.getByLabel('(Flexible) Meet Required Daily Hours').uncheck();
+await page.getByLabel('(Flexible) Start Computing Late After').fill('');
+
+// Lates, Undertime and Absences:
+await page.locator('#LateGracePeriod').fill('0.00');
+await page.getByLabel('Start Late Count After Grace Period').uncheck();
+await page.getByLabel('No Lates or Undertime').uncheck();
+await page.getByLabel('No Absent').uncheck();
+await page.locator('#HalfDayIfTardinessReached').fill('0');
+
+// Entitlements:
+await page.getByLabel('Allow Restday Work (RD)').check();
+await page.getByLabel('Allow Night Diff OT (NDFOT)').check();
+await page.getByLabel('Allow Regular Holiday (RH)').check();
+await page.getByLabel('Allow Special Holiday (SH)').check();
+await page.getByLabel('Allow Restday Regular Holiday(RHRD)').check();
+await page.getByLabel('Allow Restday Special Holiday(SHRD)').check();
+
+// Break:
+await page.getByLabel('Paid Break').check();
+await page.getByLabel('Calculate Overbreak').check();
+await page.getByLabel('Follow Break Schedule').uncheck();
+
+// Overtime:
+await page.getByLabel('Auto Calculate Overtime').check();
+await page.locator('div').filter({ hasText: 'OT Based on Schedule' }).locator('#NoOvertimeIfNotOvertheSchedule').first().check();
+await page.getByLabel('Overtime Requires Approval').check();
+await page.getByLabel('Overtime On Restday Requires Approval').uncheck();
+await page.locator('#MinimumOt').fill('15');
+
+// Restday and Holiday:
+await page.getByLabel('Restday Work Requires Approval').check();
+await page.getByLabel('Holiday Work Requires Approval').check();
+await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
+
    await page.getByRole('button', { name: 'Save' }).click();
    
    // timekeeping and payroll - processing page
