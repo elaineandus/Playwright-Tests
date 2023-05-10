@@ -30,8 +30,8 @@ test('buyer can message the seller', async ({ page }) => {
   
     await page.getByRole('link', { name: 'Ask the Seller' }).click();
    
-    await page.locator('#id_subject').fill('lover');
-    await page.locator('#id_content').fill('by taytay');
+    await page.locator('#id_subject').fill('Anon21');
+    await page.locator('#id_content').fill('Anon21');
 
     await page.getByRole('button', { name: 'Submit' }).click();
 

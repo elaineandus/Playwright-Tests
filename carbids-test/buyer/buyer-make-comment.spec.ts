@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('buyer can ask question', async ({ page }) => {
-    
+test('buyer can make comments on the car list', async ({ page }) => {
+
     await page.goto('https://stag.carbids.ph/');
 
     await page.getByRole('link', { name: 'Sign in' }).click();
@@ -28,11 +28,14 @@ test('buyer can ask question', async ({ page }) => {
 
     await expect(page).toHaveTitle('Carbids.ph | Single Car');
   
-    await page.getByRole('link', { name: 'Ask the Seller' }).click();
-
-    await page.locator('#id_question').type('red velvet');
+    await page.getByRole('link', { name: 'Add comment' }).click();
+    await page.getByLabel('Add comment:').fill('Anon12');
     await page.getByRole('button', { name: 'Submit' }).click();
-    
-    await expect(page.getByText('Success')).toBeVisible();
-    
+
+    await expect(page.getByText('Anon12')).toBeVisible();
+
+    /* js
+    await expect(page.locator('#comments')).toBeVisible('winter');
+    */
+
 });

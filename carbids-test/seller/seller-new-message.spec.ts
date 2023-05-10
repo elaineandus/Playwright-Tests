@@ -18,10 +18,10 @@ test('seller should be able to message or respond to the buyers message', async 
   await page.locator('#id_to_user').selectOption('2');
 
   await page.locator('#id_subject').fill('Input subject');
-  await page.locator('#id_content').fill('Hello im lainey');
+  await page.locator('#id_content').fill('Anon10');
   
   await page.getByRole('button', { name: 'Send' }).click();
 
-  await expect(page.getByText('lainey')).toBeVisible();
+  await expect(page.getByText('Anon10')).toBeVisible();
 
 });
