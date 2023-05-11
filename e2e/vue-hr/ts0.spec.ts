@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('test scenario 1', async ({ page }) => {
+test('test scenario 0', async ({ page }) => {
 
    await page.goto('http://192.168.11.6:3005/');
 

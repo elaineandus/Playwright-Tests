@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('test scenario 1', async ({ page }) => {
+test('test scenario 9', async ({ page }) => {
 
    await page.goto('http://192.168.11.6:3005/');
 
@@ -70,8 +70,8 @@ test('test scenario 1', async ({ page }) => {
    // modify time in and time out
    await page.goto('http://192.168.11.6:3005/Attendances?employeeId=&startTime=&endTime=&all=yes', { timeout: 60000 });
 
-   await page.locator('tr:nth-child(7) > td:nth-child(3) > .form-control').fill('2022-10-27T08:27');
-   await page.locator('tr:nth-child(10) > td:nth-child(3) > .form-control').fill('2022-10-27T18:15');
+   await page.locator('td:nth-child(3) > .form-control').first().fill('2022-10-27T08:27');
+   await page.locator('td:nth-child(3) > .form-control').last().fill('2022-10-27T18:15');
 
    await page.locator('#btnSaveLogs').click();
    
@@ -91,203 +91,203 @@ test('test scenario 1', async ({ page }) => {
    await page.getByRole('link', { name: 'Adan, Joana Joy Llarena' }).click({ timeout: 60000 });
 
    try { 
-         const Statuscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td.sticky-col.fourth-col`);
+         const Statuscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td.sticky-col.fourth-col`);
          await expect(Statuscell).toContainText('Pending OT');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const Workhrscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(7)`);
+         const Workhrscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(7)`);
          await expect(Workhrscell).toContainText('9');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const Latecell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(8)`);
+         const Latecell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(8)`);
          await expect(Latecell).toContainText('30');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const UTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(9)`);
+         const UTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(9)`);
          await expect(UTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const Breakminscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(10)`);
+         const Breakminscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(10)`);
          await expect(Breakminscell).toContainText('60');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const Overbreakcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(11)`);
+         const Overbreakcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(11)`);
          await expect(Overbreakcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const OTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(12)`);
+         const OTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(12)`);
          await expect(OTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const NDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(13)`);
+         const NDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(13)`);
          await expect(NDFcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const NDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(14)`);
+         const NDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(14)`);
          await expect(NDFOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const RDcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(15)`);
+         const RDcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(15)`);
          await expect(RDcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const RDOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(16)`);
+         const RDOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(16)`);
          await expect(RDOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const RDNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(17)`);
+         const RDNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(17)`);
          await expect(RDNDFcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const RDNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(18)`);
+         const RDNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(18)`);
          await expect(RDNDFOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
-         const RHcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(19)`);
+         const RHcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(19)`);
          await expect(RHcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };
   
    try { 
-         const RHOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(20)`);
+         const RHOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(20)`);
          await expect(RHOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const RHNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(21)`);
+         const RHNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(21)`);
          await expect(RHNDFcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const RHNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(22)`);
+         const RHNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(22)`);
          await expect(RHNDFOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const RHRDcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(23)`);
+         const RHRDcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(23)`);
          await expect(RHRDcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const RHRDNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(24)`);
+         const RHRDNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(24)`);
          await expect(RHRDNDFcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const RHRDOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(25)`);
+         const RHRDOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(25)`);
          await expect(RHRDOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const RHRDNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(26)`);
+         const RHRDNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(26)`);
          await expect(RHRDNDFOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const SHcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(27)`);
+         const SHcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(27)`);
          await expect(SHcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const SHOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(28)`);
+         const SHOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(28)`);
          await expect(SHOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const SHNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(29)`);
+         const SHNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(29)`);
          await expect(SHNDFcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const SHNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(30)`);
+         const SHNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(30)`);
          await expect(SHNDFOTcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };    
    
    try { 
-         const SHRDcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(31)`);
+         const SHRDcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(31)`);
          await expect(SHRDcell).toContainText('0');
    } catch (error) {
          await test.fail();
    };  
     
    try{ 
-        const SHRDNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(32)`);
+        const SHRDNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(32)`);
         await expect(SHRDNDFcell).toContainText('0');
    } catch (error) {
         await test.fail();
    };  
 
    try{ 
-        const SHRDOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(33)`);
+        const SHRDOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(33)`);
         await expect(SHRDOTcell).toContainText('0');
    } catch (error) {
         await test.fail();
    };
     
    try{ 
-        const SHRDNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(1) > td:nth-child(34)`);
+        const SHRDNDFOTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(34)`);
         await expect(SHRDNDFOTcell).toContainText('0');
    } catch (error) {
         await test.fail();
