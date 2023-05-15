@@ -1,10 +1,10 @@
-// TEST DONE
+// DONE (passed)
 
 import { test, expect } from '@playwright/test';
 
 test('should check correct rate for 2023', async ({ page }) => {
 
-  await page.goto('http://ptfstag2.zennerslab.com/');
+  await page.goto('http://staging.tariffcommission.gov.ph/');
 
   await page.getByRole('link', { name: 'Search' }).nth(1).click();
 
@@ -12,7 +12,7 @@ test('should check correct rate for 2023', async ({ page }) => {
   
   await page.getByRole('textbox', { name: 'Search' }).click();
   await page.getByRole('textbox', { name: 'Search' }).fill('ex2 0901.22.20.200');
-  await page.locator('a').filter({ hasText: 'ex2 0901.22.20.200 Other' }).first().click();
+  await page.locator('a').filter({ hasText: 'ex2 0901.22.20.200 Other (NOR)' }).click();
   
   await page.getByRole('button', { name: 'Search' }).click();
 

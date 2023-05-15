@@ -1,10 +1,10 @@
-// TEST DONE
+// DONE (passed)
 
 import { test, expect } from '@playwright/test';
 
 test('should check correct tariff reduction schedule', async ({ page }) => {
 
-  await page.goto('http://ptfstag2.zennerslab.com/');
+  await page.goto('http://staging.tariffcommission.gov.ph/');
 
   await page.getByRole('link', { name: 'Search' }).nth(1).click();
 
@@ -24,44 +24,19 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
   await expect(cell).toContainText('ex1 0303.99.00.100');
 
   // Check if these years are existing
-  const exConcessionYear = await page.locator('tr#exConcessionYear');
+  const exConcessionYear = await page.locator('#exConcessionYear');
   const exConcessionYearText = await exConcessionYear.innerText();
-  expect(exConcessionYearText).toContain('AHTN / HS Code	2023	2024	2025	2026	2027');
+  expect(exConcessionYearText).toContain('AHTN / HS Code	2022	2023	2024	2025	2026	2027');
 
-/*   // Select the second cell in the same row (the "2019" column)
-  try {
-  const k19Cell = await page.locator('#exConcessionRate td:nth-child(2)');
-  await expect(k19Cell).toContainText('10');
-  } catch (error) {
-    await test.fail();
-  }
-
-  try {
-  // Select the third cell in the same row (the "2020" column)
-  const k20Cell = await page.locator('#exConcessionRate td:nth-child(3)');
-  await expect(k20Cell).toContainText('10');
-  } catch (error) {
-    await test.fail();
-  }
-
-  // Select the fourth cell in the same row (the "2021" column)
-  try {
-  const k21Cell = await page.locator('#exConcessionRate td:nth-child(4)');
-  await expect(k21Cell).toContainText('7');
-  } catch (error) {
-    await test.fail();
-  }
-
-  // Select the fifth cell in the same row (the "2022" column)
-  try {
+ // Select the second cell in the same row (the "2022" column)
+ try {
   const k22Cell = await page.locator('#exConcessionRate td:nth-child(2)');
-  await expect(k22Cell).toContainText('7');
+  await expect(k22Cell).toContainText('No Data');
   } catch (error) {
     await test.fail();
-  } */
+  }
 
-
-  // Select the fifth cell in the same row (the "2023" column)
+  // Select the second cell in the same row (the "2023" column)
   try {
   const k23Cell = await page.locator('#exConcessionRate td:nth-child(3)');
   await expect(k23Cell).toContainText('5');
@@ -69,7 +44,7 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
     await test.fail();
   }
 
-  // Select the fifth cell in the same row (the "2024" column)
+  // Select the second cell in the same row (the "2024" column)
   try {
   const k24Cell = await page.locator('#exConcessionRate td:nth-child(4)');
   await expect(k24Cell).toContainText('5');
@@ -77,7 +52,7 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
     await test.fail();
   }
 
-  // Select the fifth cell in the same row (the "2025" column)
+  // Select the second cell in the same row (the "2025" column)
   try {
   const k25Cell = await page.locator('#exConcessionRate td:nth-child(5)');
   await expect(k25Cell).toContainText('5');
@@ -85,7 +60,7 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
     await test.fail();
   }
 
-  // Select the fifth cell in the same row (the "2026" column)
+  // Select the second cell in the same row (the "2026" column)
   try {
   const k26Cell = await page.locator('#exConcessionRate td:nth-child(6)');
   await expect(k26Cell).toContainText('5');
@@ -93,7 +68,7 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
     await test.fail();
   }
 
-  // Select the fifth cell in the same row (the "2027" column)
+  // Select the second cell in the same row (the "2027" column)
   try {
   const k27Cell = await page.locator('#exConcessionRate td:nth-child(7)');
   await expect(k27Cell).toContainText('5');

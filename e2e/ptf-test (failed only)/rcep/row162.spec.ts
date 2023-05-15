@@ -1,10 +1,10 @@
-// TEST DONE
+// DONE (passed)
 
 import { test, expect } from '@playwright/test';
 
 test('should check correct tariff reduction schedule', async ({ page }) => {
 
-  await page.goto('http://ptfstag2.zennerslab.com/');
+  await page.goto('http://staging.tariffcommission.gov.ph/');
 
   await page.getByRole('link', { name: 'Search' }).nth(1).click();
 
@@ -25,36 +25,64 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
   await page.getByRole('cell', { name: 'ex1 1517.90.67' }).getByText('ex1 1517.90.67').click();
 
   // Check if these years are existing (Tariff Concession)
-  const exConcessionYearAll = await page.locator('tr#exConcessionYearAll');
-  await expect(exConcessionYearAll).toContainText('20232024202520262027');
+  const exConcessionYearAll = await page.locator('#exConcessionYearAll');
+  await expect(exConcessionYearAll).toContainText('202220232024202520262027');
 
   // Select the table cell with the code
   const cell = await page.locator('#exConcessionRateAll td:nth-child(1)');
   await expect(cell).toContainText('ex1 1517.90.67');
 
+   // Select the second cell in the same row (the "2022" column)
+try {
+  const k22Cell = await page.locator('#exConcessionRateAll td:nth-child(2)');
+  await expect(k22Cell).toContainText('No Data');
+  } catch (error) {
+    await test.fail();
+  }
+
   // Select the second cell in the same row (the "2023" column)
-  const k23Cell = await page.locator('#exConcessionRateAll td:nth-child(2)');
+  try {
+  const k23Cell = await page.locator('#exConcessionRateAll td:nth-child(3)');
   await expect(k23Cell).toContainText('15');
+  } catch (error) {
+    await test.fail();
+  }
 
   // Select the second cell in the same row (the "2024" column)
-  const k24Cell = await page.locator('#exConcessionRateAll td:nth-child(3)');
+  try {
+  const k24Cell = await page.locator('#exConcessionRateAll td:nth-child(4)');
   await expect(k24Cell).toContainText('15');
+  } catch (error) {
+    await test.fail();
+  }
 
   // Select the second cell in the same row (the "2025" column)
-  const k25Cell = await page.locator('#exConcessionRateAll td:nth-child(4)');
+  try {
+  const k25Cell = await page.locator('#exConcessionRateAll td:nth-child(5)');
   await expect(k25Cell).toContainText('15');
+  } catch (error) {
+    await test.fail();
+  }
 
   // Select the second cell in the same row (the "2026" column)
-  const k26Cell = await page.locator('#exConcessionRateAll td:nth-child(5)');
+  try {
+  const k26Cell = await page.locator('#exConcessionRateAll td:nth-child(6)');
   await expect(k26Cell).toContainText('15');
+  } catch (error) {
+    await test.fail();
+  }
 
   // Select the second cell in the same row (the "2027" column)
-  const k27Cell = await page.locator('#exConcessionRateAll td:nth-child(6)');
+  try {
+  const k27Cell = await page.locator('#exConcessionRateAll td:nth-child(7)');
   await expect(k27Cell).toContainText('15');
+  } catch (error) {
+    await test.fail();
+  }
 
   /*--- Except for South Korea Link ---*/
 
-  await page.getByText('Applied for ASEAN, AU, CN, JP, and NZ. For KR, refer to Section E.').click();
+  await page.getByText('Except for Korea').click();
 
   // Check if the content in the table for Korea is existing
   const tableExAnnex = await page.locator('#tableExAnnex');
@@ -69,12 +97,20 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
 
   /*----- Tariff Concession (South Korea) ------*/
   // Check if these years are existing (Common Concession)
-  const exConcessionYearSouthKorea = await page.locator('tr#exConcessionYearSouthKorea');
+  const exConcessionYearSouthKorea = await page.locator('#exConcessionYearSouthKorea');
   await expect(exConcessionYearSouthKorea).toContainText('20232024202520262027');
+
+     // Select the second cell in the same row (the "2022" column)
+try {
+  const sk22Cell = await page.locator('#exConcessionRateSouthKorea td:nth-child(2)');
+  await expect(sk22Cell).toContainText('No Data');
+  } catch (error) {
+    await test.fail();
+  }
 
   // Select the second cell in the same row (the "2023" column)
   try {
-  const sk23Cell = await page.locator('#exConcessionRateSouthKorea > td:nth-child(2)');
+  const sk23Cell = await page.locator('#exConcessionRateSouthKorea td:nth-child(3)');
   await expect(sk23Cell).toContainText('U');
   } catch (error) {
     await test.fail();
@@ -82,7 +118,7 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
 
   // Select the second cell in the same row (the "2024" column)
   try {
-  const sk24Cell = await page.locator('#exConcessionRateSouthKorea > td:nth-child(3)');
+  const sk24Cell = await page.locator('#exConcessionRateSouthKorea td:nth-child(4)');
   await expect(sk24Cell).toContainText('U');
   } catch (error) {
     await test.fail();
@@ -90,7 +126,7 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
 
   // Select the second cell in the same row (the "2025" column)
   try {
-  const sk25Cell = await page.locator('#exConcessionRateSouthKorea > td:nth-child(4)');
+  const sk25Cell = await page.locator('#exConcessionRateSouthKorea td:nth-child(5)');
   await expect(sk25Cell).toContainText('U');
   } catch (error) {
     await test.fail();
@@ -98,7 +134,7 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
 
   // Select the second cell in the same row (the "2026" column)
   try {
-  const sk26Cell = await page.locator('#exConcessionRateSouthKorea > td:nth-child(5)');
+  const sk26Cell = await page.locator('#exConcessionRateSouthKorea td:nth-child(6)');
   await expect(sk26Cell).toContainText('U');
   } catch (error) {
     await test.fail();
@@ -106,7 +142,7 @@ test('should check correct tariff reduction schedule', async ({ page }) => {
 
   // Select the second cell in the same row (the "2027" column)
   try {
-  const sk27Cell = await page.locator('#exConcessionRateSouthKorea > td:nth-child(6)');
+  const sk27Cell = await page.locator('#exConcessionRateSouthKorea td:nth-child(7)');
   await expect(sk27Cell).toContainText('U');
   } catch (error) {
     await test.fail();

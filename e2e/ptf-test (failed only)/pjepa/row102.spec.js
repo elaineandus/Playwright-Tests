@@ -1,8 +1,10 @@
+// DONE (passed)
+
 import { test, expect } from '@playwright/test';
 
 test('should be highlighted in blue and must have a tagging of “PJEPA”', async ({ page }) => {
 
-  await page.goto('http://ptfstag2.zennerslab.com/');
+  await page.goto('http://staging.tariffcommission.gov.ph/');
   await page.getByRole('link', { name: 'Search' }).first().click();
   /* await page.locator('#jqvmap1_492').click(); */
 
