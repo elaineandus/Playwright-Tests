@@ -19,8 +19,9 @@ test('test scenario 3', async ({ page }) => {
    await page.getByRole('link', { name: 'Edit' }).click();
 
    // modify policies
-   await page.getByLabel('Auto Calculate Overtime').uncheck();
-   await page.getByLabel('Overtime Requires Approval').uncheck();
+   await page.getByLabel('Auto Calculate Overtime').check();
+   await page.getByLabel('Over Schedule OT Requires Approval').uncheck();
+   await page.getByLabel('Allow Overtime (OT)').uncheck();
 
    // Work Hours
    await page.getByLabel('Required Hours Per Week').fill('48.00');
@@ -43,7 +44,6 @@ test('test scenario 3', async ({ page }) => {
    await page.getByLabel('Absent If Tardiness Reached (Mins)').fill('0');
 
    // Entitlements:
-   await page.getByLabel('Allow Overtime (OT)').check();
    await page.getByLabel('Allow Restday Work (RD)').check();
    await page.getByLabel('Allow Night Diff (NDF)').check();
    await page.getByLabel('Allow Night Diff OT (NDFOT)').check();

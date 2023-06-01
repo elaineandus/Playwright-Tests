@@ -21,7 +21,7 @@ test('test scenario 4', async ({ page }) => {
    // modify policies
    await page.getByLabel('Paid Break').uncheck();
    await page.getByLabel('Allow Overtime (OT)').uncheck();
-   await page.getByLabel('Overtime Requires Approval').uncheck();
+   await page.getByLabel('Over Schedule OT Requires Approval').uncheck();
 
    // Work Hours
    await page.getByLabel('Required Hours Per Week').fill('48.00');

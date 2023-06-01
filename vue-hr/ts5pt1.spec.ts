@@ -21,7 +21,7 @@ test('test scenario 5 pt 1', async ({ page }) => {
    // modify policies
    await page.getByLabel('Allow Night Diff (NDF)').uncheck();
    await page.getByLabel('Allow Overtime (OT)').uncheck();
-   await page.getByLabel('Overtime Requires Approval').uncheck();
+   await page.getByLabel('Over Schedule OT Requires Approval').uncheck();
    await page.getByLabel('Absent If Tardiness Reached (Mins)').fill('120');
 
    // Work Hours

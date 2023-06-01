@@ -62,7 +62,7 @@ test('test scenario 8', async ({ page }) => {
    // Overtime:
    await page.getByLabel('Auto Calculate Overtime').check();
    await page.locator('div').filter({ hasText: 'OT Based on Schedule' }).locator('#NoOvertimeIfNotOvertheSchedule').first().check();
-   await page.getByLabel('Overtime Requires Approval').check();
+   await page.getByLabel('Over Schedule OT Requires Approval').check();
 
    // Restday and Holiday:
    await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();

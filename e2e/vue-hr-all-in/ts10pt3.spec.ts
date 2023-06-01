@@ -18,7 +18,6 @@ test('test scenario 10 pt 3', async ({ page }) => {
 
    // modify policies
    await page.getByLabel('Auto Calculate Overtime').uncheck();
-   await page.locator('#MinimumOt').fill('30');
    await page.locator('#LateGracePeriod').fill('15');
 
    // Work Hours
@@ -57,8 +56,9 @@ await page.getByLabel('Follow Break Schedule').uncheck();
 
 // Overtime:
 await page.locator('div').filter({ hasText: 'OT Based on Schedule' }).locator('#NoOvertimeIfNotOvertheSchedule').first().check();
-await page.getByLabel('Overtime Requires Approval').check();
+await page.getByLabel('Over Schedule OT Requires Approval').check();
 await page.getByLabel('Overtime On Restday Requires Approval').uncheck();
+await page.locator('#MinimumOt').fill('15');
 
 // Restday and Holiday:
 await page.getByLabel('Restday Work Requires Approval').check();

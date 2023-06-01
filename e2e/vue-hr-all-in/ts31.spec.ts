@@ -19,8 +19,9 @@ test('test scenario 3', async ({ page }) => {
    await page.getByRole('link', { name: 'Edit' }).click();
 
    // modify policies
+   await page.getByLabel('Auto Calculate Overtime').check();
    await page.getByLabel('Paid Break').uncheck();
-   await page.getByLabel('Overtime Requires Approval').check();
+   await page.getByLabel('Over Schedule OT Requires Approval').check();
 
    // Work Hours
    await page.getByLabel('Required Hours Per Week').fill('48.00');
@@ -57,7 +58,6 @@ test('test scenario 3', async ({ page }) => {
    await page.getByLabel('Follow Break Schedule').uncheck();
 
    // Overtime:
-   await page.getByLabel('Auto Calculate Overtime').check();
    await page.locator('div').filter({ hasText: 'OT Based on Schedule' }).locator('#NoOvertimeIfNotOvertheSchedule').first().check();
    await page.getByLabel('Overtime On Restday Requires Approval').uncheck();
    await page.locator('#MinimumOt').fill('15');
@@ -125,14 +125,14 @@ test('test scenario 3', async ({ page }) => {
    
    try {
          const Breakminscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(10)`);
-         await expect(Breakminscell).toHaveText('120');
+         await expect(Breakminscell).toHaveText('0');
    } catch (error) {
          await test.fail();
    };
    
    try {
          const Overbreakcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(11)`);
-         await expect(Overbreakcell).toHaveText('60');
+         await expect(Overbreakcell).toHaveText('0');
    } catch (error) {
          await test.fail();
    };

@@ -1,6 +1,8 @@
+// done; hrs = 8, expected hrs should be 9 bcz paid break = YES, auto calculate ot = NO
+
 import { test, expect } from '@playwright/test';
 
-test('test scenario 11 pt 2', async ({ page }) => {
+test('test scenario 3', async ({ page }) => {
 
    await page.goto('http://192.168.11.6:3005/');
 
@@ -17,60 +19,60 @@ test('test scenario 11 pt 2', async ({ page }) => {
    await page.getByRole('link', { name: 'Edit' }).click();
 
    // modify policies
-   await page.getByLabel('Restday Work Requires Approval').check();
-   await page.getByLabel('Paid Break').uncheck();
-   await page.getByLabel('Allow Restday Special Holiday(SHRD)').check();
-   await page.getByLabel('Allow Night Diff (NDF)').uncheck();
+   await page.getByLabel('Paid Break').check();
+   await page.getByLabel('Over Schedule OT Requires Approval').uncheck();
 
    // Work Hours
-await page.getByLabel('Required Hours Per Week').fill('48.00');
-await page.getByLabel('Required Hours Per Day').fill('8.00');
-await page.getByLabel('Calculate by Required Hours per Month').uncheck();
-await page.getByLabel('Is Compressed Work Week').uncheck();
-await page.getByLabel('Calculate By Total Work Hours').uncheck();
+   await page.getByLabel('Required Hours Per Week').fill('48.00');
+   await page.getByLabel('Required Hours Per Day').fill('8.00');
+   await page.getByLabel('Calculate by Required Hours per Month').uncheck();
+   await page.getByLabel('Is Compressed Work Week').uncheck();
+   await page.getByLabel('Calculate By Total Work Hours').uncheck();
 
-// Flexible:
-await page.getByLabel('Is Flexible').uncheck();
-await page.getByLabel('(Flexible) Meet Required Daily Hours').uncheck();
-await page.getByLabel('(Flexible) Start Computing Late After').fill('');
+   // Flexible:
+   await page.getByLabel('Is Flexible').uncheck();
+   await page.getByLabel('(Flexible) Meet Required Daily Hours').uncheck();
+   await page.getByLabel('(Flexible) Start Computing Late After').fill('');
 
-// Lates, Undertime and Absences:
-await page.locator('#LateGracePeriod').fill('0.00');
-await page.getByLabel('Start Late Count After Grace Period').uncheck();
-await page.getByLabel('No Lates or Undertime').uncheck();
-await page.getByLabel('No Absent').uncheck();
-await page.locator('#HalfDayIfTardinessReached').fill('0');
-await page.getByLabel('Absent If Tardiness Reached (Mins)').fill('0');
+   // Lates, Undertime and Absences:
+   await page.locator('#LateGracePeriod').fill('0.00');
+   await page.getByLabel('Start Late Count After Grace Period').uncheck();
+   await page.getByLabel('No Lates or Undertime').uncheck();
+   await page.getByLabel('No Absent').uncheck();
+   await page.locator('#HalfDayIfTardinessReached').fill('0');
+   await page.getByLabel('Absent If Tardiness Reached (Mins)').fill('0');
 
-// Entitlements:
-await page.getByLabel('Allow Overtime (OT)').check();
-await page.getByLabel('Allow Restday Work (RD)').check();
-await page.getByLabel('Allow Night Diff OT (NDFOT)').check();
-await page.getByLabel('Allow Regular Holiday (RH)').check();
-await page.getByLabel('Allow Special Holiday (SH)').check();
-await page.getByLabel('Allow Restday Regular Holiday(RHRD)').check();
+   // Entitlements:
+   await page.getByLabel('Allow Restday Work (RD)').check();
+   await page.getByLabel('Allow Night Diff (NDF)').check();
+   await page.getByLabel('Allow Night Diff OT (NDFOT)').check();
+   await page.getByLabel('Allow Regular Holiday (RH)').check();
+   await page.getByLabel('Allow Special Holiday (SH)').check();
+   await page.getByLabel('Allow Restday Regular Holiday(RHRD)').check();
+   await page.getByLabel('Allow Restday Special Holiday(SHRD)').check();
 
-// Break:
-await page.getByLabel('Calculate Overbreak').check();
-await page.getByLabel('Follow Break Schedule').uncheck();
+   // Break:
+   await page.getByLabel('Calculate Overbreak').check();
+   await page.getByLabel('Follow Break Schedule').uncheck();
 
-// Overtime:
-await page.getByLabel('Auto Calculate Overtime').check();
-await page.locator('div').filter({ hasText: 'OT Based on Schedule' }).locator('#NoOvertimeIfNotOvertheSchedule').first().check();
-await page.getByLabel('Over Schedule OT Requires Approval').check();
-await page.getByLabel('Overtime On Restday Requires Approval').uncheck();
-await page.locator('#MinimumOt').fill('15');
+   // Overtime:
+   await page.getByLabel('Allow Overtime (OT)').check();
+   await page.getByLabel('Auto Calculate Overtime').check();
+   await page.locator('div').filter({ hasText: 'OT Based on Schedule' }).locator('#NoOvertimeIfNotOvertheSchedule').first().check();
+   await page.getByLabel('Overtime On Restday Requires Approval').uncheck();
+   await page.locator('#MinimumOt').fill('15');
 
-// Restday and Holiday:
-await page.getByLabel('Holiday Work Requires Approval').check();
-await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
+   // Restday and Holiday:
+   await page.getByLabel('Restday Work Requires Approval').check();
+   await page.getByLabel('Holiday Work Requires Approval').check();
+   await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck(); 
 
    await page.getByRole('button', { name: 'Save' }).click();
 
    // modify time in and time out
-   await page.goto('http://192.168.11.6:3005/Attendances?employeeId=&startTime=&endTime=&all=yes', { timeout: 60000 });
+   await page.goto('http://192.168.11.6:3005/Attendances?employeeId=PEER-000291&startTime=10/27/2022&endTime=10/27/2022&isPmShift=no', { timeout: 60000 });
 
-   await page.locator('td:nth-child(3) > .form-control').first().fill('2022-10-27T08:00');
+   await page.locator('td:nth-child(3) > .form-control').first().fill('2022-10-27T09:00');
    await page.locator('td:nth-child(3) > .form-control').last().fill('2022-10-27T18:00');
 
    await page.locator('#btnSaveLogs').click();
@@ -79,7 +81,7 @@ await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
    await page.goto('http://192.168.11.6:3005/TimeSheet', { timeout: 60000 }); 
 
    // input employee details
-   await page.locator('#button-search').click();
+   /* await page.locator('#button-search').click();
    await page.locator('#ddCompany').selectOption('3');
    await page.locator('#ddBranch').selectOption('6');
    await page.locator('#accordion div').filter({ hasText: 'Employee Details' }).nth(1).click();
@@ -88,28 +90,28 @@ await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
    await page.locator('#txtYear').fill('2022');   
    await page.locator('#ddCoveredPeriod').selectOption('75');
    await page.getByRole('button', { name: 'Search'}).click({ timeout: 60000 });
-   await page.getByRole('link', { name: 'Adan, Joana Joy Llarena' }).click({ timeout: 60000 });
+   await page.getByRole('link', { name: 'Adan, Joana Joy Llarena' }).click({ timeout: 60000 }); */
 
-   /* await page.goto('http://192.168.11.6:3005/TimeSheet?Company=3&Branch=6&Department=0&Division=0&Position=0&Group=0&EmployeeId=&EmployeeName=adan&Year=2022&SelectedCoveredPeriod=75&SelectedPeriodDetails=615'); 
-   await page.getByRole('link', { name: 'Adan, Joana Joy Llarena' }).click(); */
-   
+   await page.goto('http://192.168.11.6:3005/TimeSheet?Company=3&Branch=6&Department=0&Division=0&Position=0&Group=0&EmployeeId=&EmployeeName=adan&Year=2022&SelectedCoveredPeriod=75&SelectedPeriodDetails=615'); 
+   await page.getByRole('link', { name: 'Adan, Joana Joy Llarena' }).click();
+
    try { 
          const Statuscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td.sticky-col.fourth-col`);
-         await expect(Statuscell).toHaveText('Active');
+         await expect(Statuscell).toHaveText('Late');
    } catch (error) {
          await test.fail();
    };
    
    try {
          const Workhrscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(7)`);
-         await expect(Workhrscell).toHaveText('14');
+         await expect(Workhrscell).toHaveText('9');
    } catch (error) {
          await test.fail();
    };
    
    try {
          const Latecell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(8)`);
-         await expect(Latecell).toHaveText('0');
+         await expect(Latecell).toHaveText('60');
    } catch (error) {
          await test.fail();
    };
@@ -123,28 +125,28 @@ await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
    
    try {
          const Breakminscell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(10)`);
-         await expect(Breakminscell).toHaveText('0');
+         await expect(Breakminscell).toHaveText('121');
    } catch (error) {
          await test.fail();
    };
    
    try {
          const Overbreakcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(11)`);
-         await expect(Overbreakcell).toHaveText('0');
+         await expect(Overbreakcell).toHaveText('61');
    } catch (error) {
          await test.fail();
    };
    
    try {
          const OTcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(12)`);
-         await expect(OTcell).toHaveText('360');
+         await expect(OTcell).toHaveText('60');
    } catch (error) {
          await test.fail();
    };
    
    try {
          const NDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(13)`);
-         await expect(NDFcell).toHaveText('60');
+         await expect(NDFcell).toHaveText('0');
    } catch (error) {
          await test.fail();
    };
@@ -158,7 +160,7 @@ await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
    
    try {
          const RDcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(15)`);
-         await expect(RDcell).toHaveText('14');
+         await expect(RDcell).toHaveText('0');
    } catch (error) {
          await test.fail();
    };
@@ -172,7 +174,7 @@ await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
    
    try {
          const RDNDFcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(17)`);
-         await expect(RDNDFcell).toHaveText('1');
+         await expect(RDNDFcell).toHaveText('0');
    } catch (error) {
          await test.fail();
    };
@@ -242,7 +244,7 @@ await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
    
    try { 
          const SHcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(27)`);
-         await expect(SHcell).toHaveText('14');
+         await expect(SHcell).toHaveText('0');
    } catch (error) {
          await test.fail();
    };    
@@ -270,7 +272,7 @@ await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
    
    try { 
          const SHRDcell = page.locator(`#tblDTRFixed > tbody > tr:nth-child(2) > td:nth-child(31)`);
-         await expect(SHRDcell).toHaveText('14');
+         await expect(SHRDcell).toHaveText('0');
    } catch (error) {
          await test.fail();
    };  
@@ -294,6 +296,6 @@ await page.getByLabel('No Pay When Absent Before or After Holiday').uncheck();
         await expect(SHRDNDFOTcell).toHaveText('0');
    } catch (error) {
         await test.fail();
-   };  
+   };    
 
 });

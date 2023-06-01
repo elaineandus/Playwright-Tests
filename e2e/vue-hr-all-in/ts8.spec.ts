@@ -23,7 +23,7 @@ test('test scenario 8', async ({ page }) => {
    await page.getByLabel('Allow Restday Regular Holiday(RHRD)').check();
    await page.getByLabel('Restday Work Requires Approval').uncheck();
    await page.getByLabel('Holiday Work Requires Approval').uncheck();
-   await page.getByLabel('Overtime Requires Approval').uncheck();
+   await page.getByLabel('Over Schedule OT Requires Approval').uncheck();
    await page.locator('#MinimumOt').fill('30');
 
    // Work Hours

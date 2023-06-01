@@ -21,7 +21,7 @@ test('test scenario 11 pt 1', async ({ page }) => {
    await page.getByLabel('Paid Break').uncheck();
    await page.getByLabel('Allow Restday Special Holiday(SHRD)').check();
    await page.getByLabel('Allow Night Diff (NDF)').uncheck();
-   await page.getByLabel('Overtime Requires Approval').uncheck();
+   await page.getByLabel('Over Schedule OT Requires Approval').uncheck();
 
    // Work Hours
 await page.getByLabel('Required Hours Per Week').fill('48.00');

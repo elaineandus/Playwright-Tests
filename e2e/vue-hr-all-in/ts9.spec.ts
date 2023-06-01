@@ -55,8 +55,9 @@ test('test scenario 9', async ({ page }) => {
    await page.getByLabel('Follow Break Schedule').uncheck();
 
    // Overtime:
-   await page.locator('div').filter({ hasText: 'OT Based on Schedule' }).locator('#NoOvertimeIfNotOvertheSchedule').first().check();
-   await page.getByLabel('Overtime Requires Approval').check();
+   /* await page.locator('div').filter({ hasText: 'OT Based on Schedule' }).locator('#NoOvertimeIfNotOvertheSchedule').first().check(); */
+   await page.locator('div').filter({ hasText: 'OT Based on Required Hours per Day' }).locator('#NoOvertimeIfNotOvertheSchedule').last().check();
+   await page.getByLabel('Over Schedule OT Requires Approval').check();
    await page.getByLabel('Overtime On Restday Requires Approval').uncheck();
    await page.locator('#MinimumOt').fill('15');
 

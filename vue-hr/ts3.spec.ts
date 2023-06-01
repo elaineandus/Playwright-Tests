@@ -20,7 +20,7 @@ test('test scenario 3', async ({ page }) => {
 
    // modify policies
    await page.getByLabel('Auto Calculate Overtime').uncheck();
-   await page.getByLabel('Overtime Requires Approval').uncheck();
+   await page.getByLabel('Over Schedule OT Requires Approval').uncheck();
 
    // Work Hours
    await page.getByLabel('Required Hours Per Week').fill('48.00');
