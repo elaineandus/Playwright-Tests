@@ -30,7 +30,7 @@ test('buyer can ask question', async ({ page }) => {
   
     await page.getByRole('link', { name: 'Ask the Seller' }).click();
 
-    await page.locator('#id_question').type('red velvet');
+    await page.locator('#id_question').type('kimi');
     await page.getByRole('button', { name: 'Submit' }).click();
     
     await expect(page.getByText('Success')).toBeVisible();

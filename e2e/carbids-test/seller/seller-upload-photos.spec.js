@@ -13,7 +13,7 @@ test('seller should be able to upload photos completely', async ({ page }) => {
 
   await page.getByRole('banner').getByRole('link', { name: 'Sell car' }).click();
  
-  await page.getByLabel('Title').fill('Rolls-Royce Sweptail');
+  await page.getByLabel('Title').fill('Anon12 Rolls-Royce Sweptail');
   await page.getByLabel('Auction Start').fill('2024-04-22T10:40');
   await page.getByLabel('Auction End').fill('2024-04-23T22:40');
  

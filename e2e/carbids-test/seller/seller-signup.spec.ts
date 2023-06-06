@@ -10,12 +10,14 @@ test('seller should be able to sign up successfully', async ({ page }) => {
 
   await page.getByPlaceholder('Enter your first name').fill('ariana');
   await page.getByPlaceholder('Enter your last name').fill('grande');
-  await page.getByRole('textbox', { name: 'Email address' }).fill('fakeperson003@gmail.com');
+  await page.getByRole('textbox', { name: 'Email address' }).fill('anon29@gmail.com');
   
   await page.type('input[id="signup-password"]', 'password');
   await page.type('input[id="signup-password-confirm"]', 'password');  
  
   await page.locator('#agree-to-terms').click();
+
+  await page.getByRole('button', { name: 'Accept' }).click();
 
   await page.getByRole('button', { name: 'Sign up' }).click();
 

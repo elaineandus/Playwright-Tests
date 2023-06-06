@@ -1,0 +1,54 @@
+import { test, expect } from '@playwright/test';
+
+test('test scenario 1', async ({ page }) => {
+
+   await page.goto('http://192.168.11.6:3005/');
+
+   // login
+   await page.locator('#Username').fill('admin');
+   await page.locator('#Password').fill('1@adminPass');
+   await page.getByRole('button', { name: 'Login' }).click();
+
+   // policies page
+   await page.goto('http://192.168.11.6:3005/EmployeePolicies', { timeout: 60000 }); 
+
+   // finding joana
+   await page.getByLabel('Find:').fill('adan joana', { timeout: 60000 });
+   await page.getByRole('link', { name: 'Edit' }).click();
+
+   // modify policies
+   await page.getByLabel('Paid Break').uncheck();
+
+   await page.getByRole('button', { name: 'Save' }).click();
+   
+   // timekeeping and payroll - processing page
+   await page.goto('http://192.168.11.6:3005/TimeSheet', { timeout: 60000 }); 
+
+   // input employee details
+   await page.locator('#button-search').click();
+   await page.locator('#ddCompany').selectOption('3');
+   await page.locator('#ddBranch').selectOption('6');
+   await page.locator('#accordion div').filter({ hasText: 'Employee Details' }).nth(1).click();
+   await page.locator('#txtName').fill('adan');
+   await page.locator('#accordion div').filter({ hasText: 'Period Dates' }).nth(1).click();
+   await page.locator('#txtYear').fill('2022');   
+   await page.locator('#ddCoveredPeriod').selectOption('75');
+   await page.getByRole('button', { name: 'Search'}).click({ timeout: 60000 });
+   await page.getByRole('link', { name: 'Adan, Joana Joy Llarena' }).click({ timeout: 60000 });
+
+/*    // back to policies page
+   await page.goto('http://192.168.11.6:3005/EmployeePolicies', { timeout: 60000 }); 
+
+   // back to finding joana
+   await page.getByLabel('Find:').fill('adan joana', { timeout: 60000 });
+   await page.getByRole('link', { name: 'Edit' }).click();
+
+   if (!isChecked_allowOT && await allowOT.isChecked()) {
+    await allowOT.uncheck();
+   }
+  
+   if (!isChecked_paidBreak && await paidBreak.isChecked()) {
+    await paidBreak.uncheck();
+   }
+  */
+});

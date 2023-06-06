@@ -15,7 +15,7 @@ test('seller should be able to respond to the operations message', async ({ page
 
   await page.locator('[data-href*="/messages/thread/"]').first().click();
 
-  await page.locator('#id_content').fill('anime');
+  await page.locator('#id_content').fill('youtube');
 
   await page.getByRole('button', { name: 'Send' }).click();
 
@@ -23,6 +23,6 @@ test('seller should be able to respond to the operations message', async ({ page
 
   await page.locator('[data-href*="/messages/thread/"]').first().click();
 
-  await expect(page.getByText('anime')).toBeVisible();
+  await expect(page.getByText('youtube')).toBeVisible();
 
 });
