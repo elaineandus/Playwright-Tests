@@ -13,7 +13,7 @@ test('seller should be able to list a car', async ({ page }) => {
 
   await page.getByRole('banner').getByRole('link', { name: 'Sell car' }).click();
  
-  await page.getByLabel('Title').fill('Anon10 car');
+  await page.getByLabel('Title').fill('Anon11 car');
   await page.getByLabel('Auction Start').fill('2024-04-22T10:40');
   await page.getByLabel('Auction End').fill('2024-04-23T22:40');
  

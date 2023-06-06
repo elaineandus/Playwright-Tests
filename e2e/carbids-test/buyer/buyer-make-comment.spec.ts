@@ -29,10 +29,10 @@ test('buyer can make comments on the car list', async ({ page }) => {
     await expect(page).toHaveTitle('Carbids.ph | Single Car');
   
     await page.getByRole('link', { name: 'Add comment' }).click();
-    await page.getByLabel('Add comment:').fill('Anon12');
+    await page.getByLabel('Add comment:').fill('twer');
     await page.getByRole('button', { name: 'Submit' }).click();
 
-    await expect(page.getByText('Anon12')).toBeVisible();
+    await expect(page.getByText('twer')).toBeVisible();
 
     /* js
     await expect(page.locator('#comments')).toBeVisible('winter');

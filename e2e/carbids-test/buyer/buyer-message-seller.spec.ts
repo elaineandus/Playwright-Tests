@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-test('buyer can ask question', async ({ page }) => {
-    
+test('buyer can message the seller', async ({ page }) => {
+
     await page.goto('https://stag.carbids.ph/');
 
     await page.getByRole('link', { name: 'Sign in' }).click();
@@ -28,11 +28,13 @@ test('buyer can ask question', async ({ page }) => {
 
     await expect(page).toHaveTitle('Carbids.ph | Single Car');
   
-    await page.getByRole('link', { name: 'Ask the Seller' }).click();
+    await page.getByRole('link', { name: 'Message the Seller' }).click();
+   
+    await page.locator('#id_subject').fill('zorokun');
+    await page.locator('#id_content').fill('joy');
 
-    await page.locator('#id_question').type('Anon9');
-    await page.getByRole('button', { name: 'Submit' }).click();
-    
-    await expect(page.getByText('Success')).toBeVisible();
-    
+    await page.getByRole('button', { name: 'Send' }).click();
+
+    await expect(page.getByText('joy')).toBeVisible();
+
 });

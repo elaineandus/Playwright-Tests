@@ -16,11 +16,11 @@
   },
   "homepage": "https://github.com/elaineandus/Playwright-Tests#readme",
   "devDependencies": {
-    "@playwright/test": "^1.32.1"
+    "@playwright/test": "^1.34.3"
   },
   "dependencies": {
     "firefox": "^0.0.1",
-    "playwright": "^1.31.2",
+    "playwright": "^1.34.0",
     "webkit": "^0.0.0"
   }
 }

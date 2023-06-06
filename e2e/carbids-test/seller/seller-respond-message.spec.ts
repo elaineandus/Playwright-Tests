@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('seller should be able to message or respond to the buyers message', async ({ page }) => {
+test('seller should be able to respond to the operations message', async ({ page }) => {
 
   await page.goto('https://stag.carbids.ph/');
 
@@ -13,15 +13,16 @@ test('seller should be able to message or respond to the buyers message', async 
 
   await page.getByRole('link', { name: 'Inbox' }).click();
 
-  await page.getByRole('link', { name: 'New Message' }).click();
+  await page.locator('[data-href*="/messages/thread/"]').first().click();
 
-  await page.locator('#id_to_user').selectOption('2');
+  await page.locator('#id_content').fill('youtube');
 
-  await page.locator('#id_subject').fill('Input subject');
-  await page.locator('#id_content').fill('Anon10');
-  
   await page.getByRole('button', { name: 'Send' }).click();
 
-  await expect(page.getByText('Anon10')).toBeVisible();
+  await expect(page).toHaveURL('https://stag.carbids.ph/messages/inbox/');
+
+  await page.locator('[data-href*="/messages/thread/"]').first().click();
+
+  await expect(page.getByText('youtube')).toBeVisible();
 
 });
