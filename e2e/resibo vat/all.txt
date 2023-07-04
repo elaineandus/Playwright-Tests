@@ -1,0 +1,73 @@
+import { test, expect } from '@playwright/test';
+
+test('test all', async ({ page }) => {
+  await page.goto('https://resibo-stag2.zennerslab.com/');
+  expect(page).toHaveTitle('Resibo.ph - Home');
+
+  await page.locator('#navbarSupportedContent').getByRole('link', { name: 'Login' }).click();
+
+  await page.getByPlaceholder('Email').fill('dackalacbayo@gmail.com');
+  await page.getByPlaceholder('Password').fill('password');
+  await page.getByRole('button', { name: 'Sign in' }).click();
+  
+  await page.goto('https://resibo-stag2.zennerslab.com/invoices/create/');
+
+  await page.locator('#addRow').click(); // item_uniqlo
+  await page.locator('#formset_table > tbody > tr:nth-child(1) > td.sorting_1 > span > span.selection > span').click();
+  // Name
+  await page.getByRole('searchbox').nth(1).fill('uniq');
+  await page.getByText('Uniqlo Basic T-Shirt').click();
+  // Quantity
+  await page.locator('#id_items-1-quantity').fill('1');
+  // Discount
+  await page.locator('#select2-id_items-1-discount_type-container').click();
+  await page.locator(`.select2-results__option:has-text("Senior Citizen (Single)")`).click();
+
+  await page.locator('#addRow').click(); // item_hnm
+  await page.locator('#formset_table > tbody > tr:nth-child(2) > td.sorting_1 > span > span.selection > span').click();
+  // Name
+  await page.getByRole('searchbox').nth(1).fill('h&m');
+  await page.getByText('H&M Basic T-Shirt').click();
+  // Quantity
+  await page.locator('#id_items-1-quantity').fill('1');
+  // Discount
+  await page.locator('#select2-id_items-2-discount_type-container').click();
+  await page.locator(`.select2-results__option:has-text("Senior Citizen (Single)")`).click();
+
+  await page.locator('#addRow').click(); // item_banana
+  await page.locator('#formset_table > tbody > tr:nth-child(3) > td.sorting_1 > span > span.selection > span').click();
+  // Name
+  await page.getByRole('searchbox').nth(1).fill('banana');
+  await page.getByText('Banana').click();
+  // Quantity
+  await page.locator('#id_items-1-quantity').fill('1');
+  /* await page.locator('#select2-id_items-3-discount_type-container').press('Tab'); */
+  // Discount
+  /* await page.locator('#select2-id_items-3-discount_type-container').click();
+  await page.locator(`.select2-results__option:has-text("----")`).click(); */
+
+  await page.locator('#addRow').click(); // item_nike
+  await page.locator('#formset_table > tbody > tr:nth-child(4) > td.sorting_1 > span > span.selection > span').click();
+  // Name
+  await page.getByRole('searchbox').nth(1).fill('nike');
+  await page.getByText('Nike Air Jordan 1 Retro High').click();
+  // Quantity
+  await page.locator('#id_items-1-quantity').fill('2');
+  await page.locator('#select2-id_items-4-discount_type-container').press('Tab');
+  // Discount
+  await page.locator('#select2-id_items-4-discount_type-container').click();
+  await page.locator(`.select2-results__option:has-text("20% PWD (All)")`).click();
+
+  await page.locator('#addRow').click(); // item_ikea
+  await page.locator('#formset_table > tbody > tr:nth-child(5) > td.sorting_1 > span > span.selection > span').click();
+  // Name
+  await page.getByRole('searchbox').nth(1).fill('ikea');
+  await page.getByText('IKEA LACK Side Table').click();
+  // Quantity
+  await page.locator('#id_items-1-quantity').fill('3');
+  await page.locator('#select2-id_items-5-discount_type-container').press('Tab');
+  // Discount
+  await page.locator('#select2-id_items-5-discount_type-container').click();
+  await page.locator(`.select2-results__option:has-text("PWD (Single)")`).click();
+});
+

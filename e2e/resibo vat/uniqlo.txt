@@ -1,0 +1,73 @@
+import { test, expect } from '@playwright/test';
+
+test('item vat uniqlo', async ({ page }) => {
+
+  await page.goto('https://resibo-stag2.zennerslab.com/');
+  await page.getByRole('link', { name: 'Login' }).click();
+  
+  await page.getByPlaceholder('Email').fill('dackalacbayo@gmail.com');
+  await page.getByPlaceholder('Password').fill('password');
+
+  await page.getByRole('button', { name: 'Sign in' }).click();
+
+  await page.getByRole('link', { name: 'Invoice' }).click();
+  await page.getByRole('link', { name: 'Create invoice' }).click();
+  await page.locator('#addRow').click();
+  await page.locator('#addRow').click();
+
+  await page.locator('#formset_table > tbody > tr:nth-child(1) > td.sorting_1 > span > span.selection > span').click();
+  
+  // Name
+  await page.getByRole('searchbox').nth(1).fill('uniq');
+  await page.getByText('Uniqlo Basic T-Shirt').click();
+  // Quantity
+  await page.locator('#id_items-1-quantity').fill('1');
+  // Price
+  await page.locator('#id_items-1-unit_price').fill('500.00');
+
+  // Discount
+  await page.locator('#formset_table > tbody > tr:nth-child(1) > td:nth-child(6) > span > span.selection > span > span.select2-selection__arrow').click();
+  await page.locator('#formset_table > tbody > tr:nth-child(1) > td:nth-child(6) > span > span.selection > span > span.select2-selection__arrow').click();
+  await page.getByRole('option', { name: 'Senior Citizen (Single)' }).click();
+
+  // Amount
+  try {
+  const amountCell = await page.locator('#formset_table > tbody > tr > td:nth-child(7)');
+  await expect(amountCell).toHaveText('20%');
+  } catch (error) {
+    await test.fail();
+  }
+
+  // (-)Discount (Discount Total)
+  try {
+  const discountCell = await page.locator('#formset_table > tbody > tr > td:nth-child(8)');
+  await expect(discountCell).toHaveText('89.29');
+  } catch (error) {
+    await test.fail();
+  }
+
+  // Item VAT Type (VAT Type)
+  /* try {
+  const typeCell = await page.locator('#formset_table > tbody > tr > td:nth-child(13)');
+  await expect(typeCell).toHaveText('VAT');
+  } catch (error) {
+    await test.fail();
+  } */
+
+  // Subtotal
+  try {
+  const subtotalCell = await page.locator('#formset_table > tbody > tr > td:nth-child(9)');
+  await expect(subtotalCell).toHaveText('500.00');
+  } catch (error) {
+    await test.fail();
+  }
+
+  // (Total) Amount Payable
+  try {
+  const totalCell = await page.locator('#formset_table > tbody > tr > td:nth-child(10)');
+  await expect(totalCell).toHaveText('357.14');
+  } catch (error) {
+    await test.fail();
+  }
+  
+});
