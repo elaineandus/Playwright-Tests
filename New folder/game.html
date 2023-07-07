@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ninja Mode</title>
+    <link rel="icon" href="img/ninja.png"/>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="game-container">
+            <div class="game-title">
+                <h1>THE NINJA MODE</h1>
+            </div>
+
+            <div id="container">
+                <span>Attempts: <span id="attempts">20</span></span>
+                <span>Total Gold: <span id="totalGold">0</span></span>
+                <button id="reset" class="btn btn-danger" onclick="resetGame()">Reset Game</button>
+                <button class="btn btn-secondary"> Log History</button>
+            </div>
+
+            <div class="locations">
+                <div class="d-flex justify-content-around position-relative m-4">
+                <button class="location-btn" id="cave"><span>Cave </span> <img src="./img/cave.png" alt=""></button>
+                
+                <button class="location-btn" id="casino"><span>Casino </span> <img src="./img/casino.png" alt=""></button>
+                
+                <button class="location-btn" id="house"><span>House </span> <img src="./img/house.png" alt=""></button>
+                
+                <button class="location-btn" id="goldmine"><span>Goldmine </span> <img src="./img/goldmine.png" alt=""></button>
+                        
+                </div>
+                
+                <div class="d-flex justify-content-center position-relative">
+                    <img id="ninja" src="./img/character.gif" alt="" class="img-fluid">
+                
+                </div>
+                </div> 
+                <div id="message" class="d-flex justify-content-center mx-auto"></div>
+        </div>
+        
+        <div id="log-container">
+            <div id="summary-tab">
+              <h3>Stats</h3>
+              <p>Total Gains: <span id="totalGains">0</span></p>
+              <p>Total Loss: <span id="totalLosses">0</span></p>
+            </div>
+          </div>
+          
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="script.js"></script>
+
+    </div>
+</body>
+</html>

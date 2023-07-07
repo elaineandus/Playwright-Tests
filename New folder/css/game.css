@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #fff;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.857),rgba(0,0,0,0.5)), url(/img/background.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+.container {
+    padding-top: 20px;
+}
+#game-container {
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px;
+    margin-top: 10px;
+    border-radius: 15px;
+    border-radius: 15px;
+    border: 4px solid #fc1c14;
+    background-color: #fc1c1423;
+}
+.game-title h1{
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+#container {
+    position: absolute;
+    top: 3;
+    right: 0;
+    width: 180px;
+    height: 200px;
+    padding: 20px;
+    margin-top: 20px;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+#container button {
+    margin: 10px 0;
+}
+#log-container {
+    margin-top: 210px;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: scroll;
+    padding: 10px;
+    border: 1px solid #ddd;
+    color: #fff;
+}
+.location-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 10px 5px;
+    padding: 15px 32px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    background-color: transparent;
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.location-btn:hover {
+    background-color: #fff;
+    transform: scale(0.9);
+    color: #111;
+}
+img {
+    width: 200%;
+    height: 150%;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+#ninja {
+    padding-top: 60px;
+    width: 160px;
+    
+    position: absolute;
+    z-index: 1;
+}
+
+
+
+
